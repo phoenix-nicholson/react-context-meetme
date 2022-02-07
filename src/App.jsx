@@ -3,10 +3,11 @@ import './App.css'
 import Layout from './views/Layout/Layout'
 import Home from './views/Home/Home'
 import fetchUser from './services/user'
+import { useUser } from './services/context/context'
 
 function App() {
   // inital value should match the data type of end value
-  const [user, setUser] = useState({})
+  const { user, setUser } = useUser({})
 
   useEffect(() => {
     fetchUser()
@@ -16,7 +17,7 @@ function App() {
       .catch((error) => {
         throw new Error(`Error: ${error}`)
       })
-  }, [])
+  }, [setUser])
 
   return (
     <Layout user={user}>
